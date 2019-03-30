@@ -13,6 +13,24 @@ const addNote = (title,body) => {
     }
 }
 
+const readNote = (title) => {
+    const loadedNotes = loadNotes();
+    const noteToRead = loadedNotes.find((note) => note.title === title);
+    if(noteToRead){
+        console.log(chalk.green('Your note:'));
+        console.log(`Title: ${noteToRead.title}`);
+        console.log(`Title: ${noteToRead.body}`);
+    }else{
+        console.log(chalk.red(`Note with title "${title}" not founded.`));
+    }
+}
+
+const listNotes = () => {
+    const loadedNotes = loadNotes();
+    console.log(chalk.inverse('Your notes:'));
+    loadedNotes.forEach((note) => console.log(`- ${note.title}`) );
+}
+
 const removeNote = (title) => {
     const loadedNotes = loadNotes();
     const notesToKeep = loadedNotes.filter((note) => note.title !== title);
@@ -42,5 +60,7 @@ const saveNotes = (notes) => {
 
 module.exports = {
    removeNote,
-    addNote
+    addNote,
+    listNotes,
+    readNote
 }
